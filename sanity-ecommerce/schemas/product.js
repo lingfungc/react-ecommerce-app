@@ -14,7 +14,7 @@ export default {
     },
     {
       name: 'name',
-      title: 'title',
+      title: 'Name',
       type: 'string',
     },
     {
