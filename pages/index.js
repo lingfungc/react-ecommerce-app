@@ -9,6 +9,7 @@ const Home = () => {
         <p>Perfumes of many variations</p>
       </div>
       <div>{["Product 1", "Product 2"].map((product) => product)}</div>
+      Footer
     </>
   );
 };
