@@ -1,4 +1,7 @@
 import React from "react";
+// import Footer from "./components/Footer";
+
+import { Product, HeroBanner, FooterBanner, Footer } from "./components";
 
 const Home = () => {
   return (
@@ -11,7 +14,7 @@ const Home = () => {
       <div className="products-container">
         {["Product 1", "Product 2"].map((product) => product)}
       </div>
-      Footer
+      <Footer />
     </>
   );
 };
