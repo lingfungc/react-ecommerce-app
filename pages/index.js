@@ -8,8 +8,8 @@ import { Product, HeroBanner, FooterBanner, Footer } from "./components";
 const Home = ({ products, banners }) => {
   return (
     <>
-      <HeroBanner />
-      {console.log(banners)}
+      <HeroBanner heroBanner={banners.length & banners[0]} />
+      {/* {console.log(banners)} */}
 
       <div className="products-heading">
         <h2>Best Selling Products</h2>
