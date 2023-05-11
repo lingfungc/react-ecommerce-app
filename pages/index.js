@@ -4,6 +4,7 @@ import { client } from "../lib/client.js";
 
 import { Product, HeroBanner, FooterBanner, Footer } from "./components";
 
+// * We are getting the data { products, banners } as props from getServerSideProps() i.e. Sanity
 const Home = ({ products, banners }) => {
   return (
     <>
@@ -22,6 +23,7 @@ const Home = ({ products, banners }) => {
   );
 };
 
+// * This getServerSideProps() is a Next.js function that allows us to fetch data and pass it as props to React component(s)
 export const getServerSideProps = async () => {
   const products = await client.fetch(`*[_type == "product"]`);
   const banners = await client.fetch(`*[_type == "banner"]`);
