@@ -8,7 +8,8 @@ import { Product, HeroBanner, FooterBanner, Footer } from "./components";
 const Home = ({ products, banners }) => {
   return (
     <>
-      <HeroBanner heroBanner={banners.length & banners[0]} />
+      {/* The { banners.length } is a conditional. Only when it's true, we pass the banners[0] as heroBanner to HeroBanner component */}
+      <HeroBanner heroBanner={banners.length && banners[0]} />
       {/* {console.log(banners)} */}
 
       <div className="products-heading">
@@ -24,6 +25,7 @@ const Home = ({ products, banners }) => {
 };
 
 // * This getServerSideProps() is a Next.js function that allows us to fetch data and pass it as props to React component(s)
+// * We use getServerSideProps() in Next.js while we use useEffect() with fetch() in React
 export const getServerSideProps = async () => {
   const products = await client.fetch(`*[_type == "product"]`);
   const banners = await client.fetch(`*[_type == "banner"]`);

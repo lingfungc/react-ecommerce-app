@@ -1,11 +1,12 @@
 import React from "react";
 import Link from "next/link";
 
-const HeroBanner = () => {
+const HeroBanner = ({ heroBanner }) => {
   return (
     <div className="hero-banner-container">
       <div>
-        <p className="beats-solo">Small Text</p>
+        {console.log(heroBanner)}
+        <p className="beats-solo">{heroBanner.smallText}</p>
         <h3>Mid Text</h3>
         <img src="" alt="perfumes" className="hero-banner-image" />
 
