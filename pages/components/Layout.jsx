@@ -10,6 +10,7 @@ const Layout = ({ children }) => {
     <div className="layout">
       <Head>
         <title>THY Perfumery - by Ling Fung Chan</title>
+        <link rel="icon" href="../../lingfungc-favicon-32x32.png" sizes="any" />
       </Head>
       <header>
         <Navbar />
