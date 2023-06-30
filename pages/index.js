@@ -1,10 +1,12 @@
 import React from "react";
 
+// This "client.js" is responsible for getting backend data from Sanity
+// We are using this "client.js" with .getServerSideProps() and pass the data as props
 import { client } from "../lib/client.js";
 
 import { Product, HeroBanner, FooterBanner, Footer } from "./components";
 
-// * We are getting the data { products, banners } as props from getServerSideProps() i.e. Sanity
+// We are getting the data { products, banners } as props from getServerSideProps() i.e. Sanity
 const Home = ({ products, banners }) => {
   return (
     <>
@@ -27,8 +29,8 @@ const Home = ({ products, banners }) => {
   );
 };
 
-// * This getServerSideProps() is a Next.js function that allows us to fetch data and pass it as props to React component(s)
-// * We use getServerSideProps() in Next.js while we use useEffect() with fetch() in React
+// This getServerSideProps() is a Next.js function that allows us to fetch data and pass it as props to React component(s)
+// We use getServerSideProps() in Next.js while we use useEffect() with fetch() in React
 export const getServerSideProps = async () => {
   const products = await client.fetch(`*[_type == "product"]`);
   const banners = await client.fetch(`*[_type == "banner"]`);
