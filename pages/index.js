@@ -4,7 +4,12 @@ import React from "react";
 // We are using this "client.js" with .getServerSideProps() and pass the data as props
 import { client } from "../lib/client.js";
 
-import { Product, HeroBanner, FooterBanner, Footer } from "./components";
+import {
+  Product,
+  HeroBanner,
+  FooterBanner,
+  Footer,
+} from "../components/index.js";
 
 // We are getting the data { products, banners } as props from getServerSideProps() i.e. Sanity
 const Home = ({ products, banners }) => {
