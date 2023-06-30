@@ -94,7 +94,7 @@ span.text-red {
 }
 
 .cart-icon:hover {
-  transform: scale(1.1, 1.1);
+  transform: scale(1.05, 1.05);
 }
 
 .cart-item-qty {
@@ -127,10 +127,13 @@ span.text-red {
 }
 
 .product-card:hover {
-  transform: scale(1.1, 1.1);
+  transform: scale(1.05, 1.05);
 }
 
 .product-image {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
   border-radius: 15px;
   background-color: #ebebeb;
   transform: scale(1, 1);
@@ -462,7 +465,7 @@ span.text-red {
 }
 
 .btn:hover {
-  transform: scale(1.1, 1.1);
+  transform: scale(1.05, 1.05);
 }
 
 .product-detail-container {
@@ -566,7 +569,7 @@ span.text-red {
 }
 
 .buttons .add-to-cart:hover {
-  transform: scale(1.1, 1.1);
+  transform: scale(1.05, 1.05);
 }
 
 .buttons .buy-now {
@@ -584,7 +587,7 @@ span.text-red {
 }
 
 .buttons .buy-now:hover {
-  transform: scale(1.1, 1.1);
+  transform: scale(1.05, 1.05);
 }
 
 .quantity-desc {
