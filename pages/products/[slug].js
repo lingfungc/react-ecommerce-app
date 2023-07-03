@@ -18,7 +18,7 @@ const ProductDetails = ({ product, products }) => {
 
   const [index, setIndex] = useState(0);
 
-  const { decQty, incQty, qty } = useStateContext();
+  const { decQty, incQty, qty, onAdd } = useStateContext();
 
   // console.log(products);
 
@@ -82,7 +82,12 @@ const ProductDetails = ({ product, products }) => {
           </div>
 
           <div className="buttons">
-            <button type="button" className="add-to-cart" onClick="">
+            <button
+              type="button"
+              className="add-to-cart"
+              // * We need to use onAdd() as a callback function
+              onClick={() => onAdd(product, qty)}
+            >
               Add to cart
             </button>
             <button type="button" className="buy-now" onClick="">
@@ -126,6 +131,7 @@ const ProductDetails = ({ product, products }) => {
 //   };
 // };
 
+// * We need to get the product data from Sanity by params[slug]
 export const getStaticPaths = async () => {
   return {
     paths: [
