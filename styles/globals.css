@@ -22,6 +22,10 @@ a {
   text-decoration: none;
 }
 
+.m-center {
+  margin: auto;
+}
+
 .main-container {
   max-width: 1400px;
   margin: auto;
@@ -110,6 +114,22 @@ span.text-red {
   border-radius: 50%;
   text-align: center;
   font-weight: 600;
+}
+
+.item-desc .quantity {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.item-desc .quantity .quantity-desc {
+  width: 100%;
+  display: flex;
+  /* gap: 20px; */
+  margin-top: 10px;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .products-container {
@@ -390,14 +410,16 @@ span.text-red {
 }
 
 .product {
+  height: 240px;
   display: flex;
   gap: 30px;
   padding: 20px;
 }
 
 .product .cart-product-image {
-  width: 180px;
+  width: 150px;
   height: 150px;
+  object-fit: cover;
   border-radius: 15px;
   background-color: #ebebeb;
 }
