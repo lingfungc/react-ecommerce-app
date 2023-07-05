@@ -38,6 +38,8 @@ export const StateContext = ({ children }) => {
     }
 
     toast.success(`Added ${qty} ${product.name} to the cart.`);
+
+    console.log(cartItems);
   };
 
   const toggleCartItemQuantity = (id, value) => {
@@ -89,6 +91,7 @@ export const StateContext = ({ children }) => {
         decQty,
         onAdd,
         setShowCart,
+        toggleCartItemQuantity,
       }}
     >
       {children}
