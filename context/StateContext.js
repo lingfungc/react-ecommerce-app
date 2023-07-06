@@ -39,6 +39,8 @@ export const StateContext = ({ children }) => {
 
     toast.success(`Added ${qty} ${product.name} to the cart.`);
 
+    setQty(1);
+
     // console.log(cartItems);
   };
 
