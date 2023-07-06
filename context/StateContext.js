@@ -10,8 +10,8 @@ export const StateContext = ({ children }) => {
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
 
-  let selectedProduct;
-  let selectedProductIndex;
+  // let selectedProduct;
+  // let selectedProductIndex;
 
   const onAdd = (product, quantity) => {
     const checkProductInCart = cartItems.find(
@@ -43,25 +43,29 @@ export const StateContext = ({ children }) => {
   };
 
   const toggleCartItemQuantity = (id, value) => {
-    selectedProduct = cartItems.find((item) => item._id === id);
-    selectedProductIndex = cartItems.findIndex((item) => item._id === id);
+    let selectedProduct = cartItems.find((item) => item._id === id);
+    let selectedProductIndex = cartItems.findIndex((item) => item._id === id);
 
-    // We use .filter() instead of .splice because the .filter() isn't a mutable function for state(s)
+    const newSelectedProduct = selectedProduct;
+
+    // We use .filter() instead of .spice because the .filter() isn't a mutable function for state(s)
     const newCartItems = cartItems.filter((item) => item._id !== id);
 
     if (value === "inc") {
-      setCartItems([
-        ...newCartItems,
-        { ...selectedProduct, quantity: selectedProduct.quantity + 1 },
-      ]);
+      newSelectedProduct.quantity += 1;
+      newCartItems.splice(selectedProductIndex, 0, newSelectedProduct);
+
+      setCartItems(newCartItems);
       setTotalPrice((prevTotalPrice) => prevTotalPrice + selectedProduct.price);
       setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + 1);
-    } else if (value === "dec") {
+    }
+
+    if (value === "dec") {
       if (selectedProduct.quantity > 1) {
-        setCartItems([...cartItems], {
-          ...selectedProduct,
-          quantity: selectedProduct.quantity - 1,
-        });
+        newSelectedProduct.quantity -= 1;
+        newCartItems.splice(selectedProductIndex, 0, newSelectedProduct);
+
+        setCartItems(newCartItems);
         setTotalPrice(
           (prevTotalPrice) => prevTotalPrice - selectedProduct.price
         );
@@ -86,14 +90,15 @@ export const StateContext = ({ children }) => {
     <Context.Provider
       value={{
         showCart,
+        setShowCart,
         cartItems,
+        setCartItems,
         totalPrice,
         totalQuantities,
         qty,
         incQty,
         decQty,
         onAdd,
-        setShowCart,
         toggleCartItemQuantity,
       }}
     >
