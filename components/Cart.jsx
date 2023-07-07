@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
 
+import axios from "axios";
+
 import Link from "next/link";
 
 import {
@@ -34,19 +36,49 @@ const Cart = () => {
   const handleCheckout = async () => {
     const stripe = await getStripe();
 
-    const response = await fetch("/api/stripe", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(cartItems),
-    });
+    // * Using .fetch() to make API request(s) to the backend
+    // const response = await fetch("/api/stripe", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(cartItems),
+    // });
 
-    if (response.statusCode === 500) return;
+    // if (response.statusCode === 500) return;
 
-    const data = await response.json();
+    // const data = await response.json();
 
-    toast.loading("Redirecting to checkout page.");
+    // toast.loading("Redirecting to checkout page.");
 
-    stripe.redirectToCheckout({ sessionId: data.id });
+    // stripe.redirectToCheckout({ sessionId: data.id });
+
+    // * Using axios to make API request(s) to the backend
+    // axios
+    //   .post("/api/stripe", cartItems, {
+    //     headers: { "Content-Type": "application/json" },
+    //   })
+    //   .then((response) => {
+    //     toast.loading("Redirecting to checkout page.");
+    //     stripe.redirectToCheckout({ sessionId: response.data.id });
+    //   })
+    //   .catch((error) => {
+    //     if (error.response) {
+    //       console.log(error.response.status);
+    //     }
+    //   });
+
+    // * Using axios to make API request(s) to the backend with try/catch to handle error(s)
+    try {
+      const response = await axios.post("/api/stripe", cartItems, {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      toast.loading("Redirecting to checkout page.");
+      stripe.redirectToCheckout({ sessionId: response.data.id });
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.status);
+      }
+    }
   };
 
   return (
