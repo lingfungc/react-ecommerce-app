@@ -13,11 +13,10 @@ export default async function handler(req, res) {
       const params = {
         submit_type: "pay",
         mode: "payment",
-        // payment_method_types: ["card", "paypal", "link", "klarna"],
         allow_promotion_codes: true,
         billing_address_collection: "required",
         shipping_address_collection: {
-          allowed_countries: ["GB", "JP", "US", "HK"], // Limit shipping addresses to specific countries if needed
+          allowed_countries: ["GB", "HK", "JP", "US"], // Limit shipping addresses to specific countries if needed
         },
         phone_number_collection: {
           enabled: "true",
@@ -27,13 +26,6 @@ export default async function handler(req, res) {
           { shipping_rate: "shr_1NRDSpAiibJjByt5R8YVozuX" },
         ],
         // * This "line_items" should be all the products in the shopping cart
-        // line_items: [
-        //   {
-        //     // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-        //     price: "{{PRICE_ID}}",
-        //     quantity: 1,
-        //   },
-        // ],
         line_items: req.body.map((item) => {
           // * This "img" now is only an object from Sanity, and we need to convert it to an url
           const img = item.image[0].asset._ref;

@@ -41,6 +41,8 @@ export const StateContext = ({ children }) => {
 
     setQty(1);
 
+    setShowCart(true);
+
     // console.log(cartItems);
   };
 
@@ -111,7 +113,9 @@ export const StateContext = ({ children }) => {
         cartItems,
         setCartItems,
         totalPrice,
+        setTotalPrice,
         totalQuantities,
+        setTotalQuantities,
         qty,
         incQty,
         decQty,
