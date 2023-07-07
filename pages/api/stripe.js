@@ -13,7 +13,7 @@ export default async function handler(req, res) {
       const params = {
         submit_type: "pay",
         mode: "payment",
-        payment_method_types: ["card", "paypal", "link", "klarna"],
+        // payment_method_types: ["card", "paypal", "link", "klarna"],
         allow_promotion_codes: true,
         billing_address_collection: "required",
         shipping_address_collection: {
