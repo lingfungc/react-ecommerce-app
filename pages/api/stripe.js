@@ -13,8 +13,15 @@ export default async function handler(req, res) {
       const params = {
         submit_type: "pay",
         mode: "payment",
-        payment_method_types: ["card"],
-        billing_address_collection: "auto",
+        payment_method_types: ["card", "paypal", "link", "klarna"],
+        allow_promotion_codes: true,
+        billing_address_collection: "required",
+        shipping_address_collection: {
+          allowed_countries: ["GB", "JP", "US", "HK"], // Limit shipping addresses to specific countries if needed
+        },
+        phone_number_collection: {
+          enabled: "true",
+        },
         shipping_options: [
           { shipping_rate: "shr_1NRDSNAiibJjByt5LYclO2y9" },
           { shipping_rate: "shr_1NRDSpAiibJjByt5R8YVozuX" },
