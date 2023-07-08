@@ -24,7 +24,7 @@ const HeroBanner = ({ heroBanner }) => {
           className="hero-banner-image"
         />
         <div>
-          <Link href="/product/ID">
+          <Link href={`/products/${heroBanner.slug.current}`}>
             <button type="button">Explore</button>
           </Link>
           <div className="desc">
