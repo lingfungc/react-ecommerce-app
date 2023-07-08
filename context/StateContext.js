@@ -5,13 +5,58 @@ const Context = createContext();
 
 export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(() => {
+    if (typeof window !== "undefined") {
+      const data = JSON.parse(localStorage.getItem("cart"));
+      return data;
+    }
+    return null;
+  });
+
   const [totalPrice, setTotalPrice] = useState(0);
+  // const [totalPrice, setTotalPrice] = useState(() => {
+  //   if (typeof window !== "undefined") {
+  //     const data = JSON.parse(localStorage.getItem("cartPrice"));
+  //     return data;
+  //   }
+  //   return 0;
+  // });
+
   const [totalQuantities, setTotalQuantities] = useState(0);
+  // const [totalQuantities, setTotalQuantities] = useState(() => {
+  //   if (typeof window !== "undefined") {
+  //     const data = JSON.parse(localStorage.getItem("cartQty"));
+  //     return data;
+  //   }
+  //   return 0;
+  // });
+
   const [qty, setQty] = useState(1);
 
   let selectedProduct;
   let selectedProductIndex;
+
+  useEffect(() => {
+    window.localStorage.setItem("cart", JSON.stringify(cartItems));
+    // window.localStorage.setItem("cartQty", JSON.stringify(totalQuantities));
+    // window.localStorage.setItem("cartPrice", JSON.stringify(totalPrice));
+  }, [cartItems]);
+  // }, [cartItems, totalQuantities, totalPrice]);
+
+  useEffect(() => {
+    setCartItems(JSON.parse(localStorage.getItem("cart")));
+
+    let totalCartQty = 0;
+    let totalCartPrice = 0;
+
+    cartItems.forEach((item) => {
+      totalCartQty += item.quantity;
+      totalCartPrice += item.price * item.quantity;
+    });
+
+    setTotalQuantities(totalCartQty);
+    setTotalPrice(totalCartPrice);
+  }, []);
 
   const onAdd = (product, quantity) => {
     const checkProductInCart = cartItems.find(
