@@ -13,6 +13,7 @@ const FooterBanner = ({
     midText,
     desc,
     product,
+    slug,
     buttonText,
     image,
   },
