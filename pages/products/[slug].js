@@ -41,6 +41,8 @@ const ProductDetails = ({ product, products }) => {
             {/* This "?" is to ensure the "image" array exists */}
             {image?.map((item, i) => (
               <img
+                // The "key" should be unique and can't use "item._id" because it will be the same for all images
+                key={i}
                 src={urlFor(item)}
                 className={
                   i === index ? "small-image selected-image" : "small-image"
@@ -77,9 +79,7 @@ const ProductDetails = ({ product, products }) => {
               <span className="minus" onClick={decQty}>
                 <AiOutlineMinus />
               </span>
-              <span className="num" onClick="">
-                {qty}
-              </span>
+              <span className="num">{qty}</span>
               <span className="plus" onClick={incQty}>
                 <AiOutlinePlus />
               </span>
