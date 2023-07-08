@@ -13,7 +13,6 @@ const FooterBanner = ({
     midText,
     desc,
     product,
-    slug,
     buttonText,
     image,
   },
@@ -31,7 +30,7 @@ const FooterBanner = ({
           <p>{smallText}</p>
           <h3>{midText}</h3>
           <p>{desc}</p>
-          <Link href={`/products/${slug.current}`}>
+          <Link href={`/product/${product}}`}>
             <button type="button">{buttonText}</button>
           </Link>
         </div>

@@ -38,9 +38,10 @@ export const StateContext = ({ children }) => {
 
   useEffect(() => {
     window.localStorage.setItem("cart", JSON.stringify(cartItems));
-    window.localStorage.setItem("cartQty", JSON.stringify(totalQuantities));
-    window.localStorage.setItem("cartPrice", JSON.stringify(totalPrice));
-  }, [cartItems, totalQuantities, totalPrice]);
+    // window.localStorage.setItem("cartQty", JSON.stringify(totalQuantities));
+    // window.localStorage.setItem("cartPrice", JSON.stringify(totalPrice));
+  }, [cartItems]);
+  // }, [cartItems, totalQuantities, totalPrice]);
 
   useEffect(() => {
     setCartItems(JSON.parse(localStorage.getItem("cart")));
