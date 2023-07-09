@@ -190,39 +190,40 @@ const ProductDetails = ({ product, products }) => {
   );
 };
 
-// * This block of code is from JavaScript Mastery, but not working
-// export const getStaticPaths = async () => {
-//   const products = await client.fetch(`*[_type == "product] {
-//     slug {
-//       current
-//     }
-//   }`);
-
-//   const paths = products.map((product) => ({
-//     params: {
-//       slug: product.slug.current,
-//     },
-//   }));
-
-//   return {
-//     paths,
-//     fallback: "blocking",
-//   };
-// };
-
-// * We need to get the product data from Sanity by params[slug]
+// * This block of code is from JavaScript Mastery
 export const getStaticPaths = async () => {
+  const products = await client.fetch(`*[_type == "product"] {
+    slug {
+      current
+    }
+  }
+  `);
+
+  const paths = products.map((product) => ({
+    params: {
+      slug: product.slug.current,
+    },
+  }));
+
   return {
-    paths: [
-      {
-        params: {
-          slug: "'${slug}'.js",
-        },
-      },
-    ],
+    paths,
     fallback: "blocking",
   };
 };
+
+// * We need to get the product data from Sanity by params[slug]
+// export const getStaticPaths = async () => {
+//   return {
+//     paths: [
+//       {
+//         params: {
+//           slug: "'${slug}'.js",
+//         },
+//       },
+//     ],
+//     fallback: "blocking",
+//   };
+// };
 
 export const getStaticProps = async ({ params: { slug } }) => {
   const product = await loadProduct(slug);
