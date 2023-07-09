@@ -49,17 +49,22 @@ a {
   margin: 0 auto;
 }
 
+.carousel-arrows {
+  display: flex;
+  justify-content: center;
+}
+
 .carousel-scroll-left {
   position: absolute;
-  left: 260px;
-  transform: translateY(160px);
+  transform: translate(-400px, 160px);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
 }
 
 .carousel-scroll-right {
   position: absolute;
-  right: 260px;
-  transform: translateY(160px);
+  transform: translate(400px, 160px);
   cursor: pointer;
 }
 
