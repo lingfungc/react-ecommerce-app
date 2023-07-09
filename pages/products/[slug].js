@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 
 import { client, urlFor } from "../../lib/client";
 
+import { loadProduct, loadProducts } from "../../lib/loadProductData";
+
 import { useStateContext } from "../../context/StateContext";
 
 import { Product } from "../../components";
@@ -223,13 +225,17 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params: { slug } }) => {
-  const product = await client.fetch(
-    // We only want the first product that matches this query with the slug name
-    `*[_type == "product" && slug.current == '${slug}'][0]`
-  );
+  const product = await loadProduct(slug);
+  // console.log(product);
 
-  const products = await client.fetch(`*[_type == "product"]`);
+  const products = await loadProducts();
+  // console.log(products);
 
+  // const product = await client.fetch(
+  //   // We only want the first product that matches this query with the slug name
+  //   `*[_type == "product" && slug.current == '${slug}'][0]`
+  // );
+  // const products = await client.fetch(`*[_type == "product"]`);
   return { props: { product, products } };
 };
 
