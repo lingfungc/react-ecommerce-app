@@ -45,7 +45,22 @@ a {
 
 .carousel {
   height: 420px;
-  width: 690px;
+  width: 680px;
+  margin: 0 auto;
+}
+
+.carousel-arrows {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 740px;
+  transform: translate(-30px, 160px);
+  cursor: pointer;
+}
+
+.carousel-cards {
+  height: 100%;
+  width: 100%;
   overflow-x: scroll;
   white-space: nowrap;
   display: flex;

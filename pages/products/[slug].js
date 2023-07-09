@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import { client, urlFor } from "../../lib/client";
 
@@ -9,6 +9,8 @@ import { Product } from "../../components";
 import {
   AiOutlineMinus,
   AiOutlinePlus,
+  AiOutlineLeft,
+  AiOutlineRight,
   AiFillStar,
   AiOutlineStar,
 } from "react-icons/ai";
@@ -20,12 +22,44 @@ const ProductDetails = ({ product, products }) => {
 
   const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
 
-  // console.log(products);
+  const carouselRef = useRef(null);
 
   const handleBuyNow = () => {
     onAdd(product, qty);
     setShowCart(true);
   };
+
+  const [scrollAmount, setScrollAmount] = useState(0);
+
+  let scrollPerClick = 480;
+
+  useEffect(() => {
+    carouselRef.current.scrollTo({
+      top: 0,
+      left: scrollAmount,
+      behavior: "smooth",
+    });
+  }, [scrollAmount]);
+
+  const scrollLeft = () => {
+    setScrollAmount((prevScrollAmount) => {
+      const newScrollAmount = prevScrollAmount - scrollPerClick;
+      return newScrollAmount < 0 ? 0 : newScrollAmount;
+    });
+  };
+
+  const scrollRight = () => {
+    const carouselWidth = carouselRef.current.scrollWidth;
+
+    setScrollAmount((prevScrollAmount) => {
+      const newScrollAmount = prevScrollAmount + scrollPerClick;
+      return newScrollAmount > carouselWidth
+        ? carouselWidth - scrollPerClick
+        : newScrollAmount;
+    });
+  };
+
+  // console.log(products);
 
   return (
     <div>
@@ -107,11 +141,17 @@ const ProductDetails = ({ product, products }) => {
         {/* <div className="marquee"> */}
         {/* <div className="maylike-products-container track"> */}
         <div className="carousel">
-          {products.map((item) => (
-            <div className="carousel-card">
-              <Product key={item._id} product={item} />
-            </div>
-          ))}
+          <div className="carousel-arrows">
+            <AiOutlineLeft onClick={scrollLeft} />
+            <AiOutlineRight onClick={scrollRight} />
+          </div>
+          <div className="carousel-cards" ref={carouselRef}>
+            {products.map((item) => (
+              <div className="carousel-card" key={item._id}>
+                <Product product={item} />
+              </div>
+            ))}
+          </div>
         </div>
         {/* </div> */}
         {/* </div> */}
