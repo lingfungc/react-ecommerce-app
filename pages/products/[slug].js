@@ -104,13 +104,17 @@ const ProductDetails = ({ product, products }) => {
 
       <div className="maylike-products-wrapper">
         <h2>You may also like</h2>
-        <div className="marquee">
-          <div className="maylike-products-container track">
-            {products.map((item) => (
+        {/* <div className="marquee"> */}
+        {/* <div className="maylike-products-container track"> */}
+        <div className="carousel">
+          {products.map((item) => (
+            <div className="carousel-card">
               <Product key={item._id} product={item} />
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
+        {/* </div> */}
+        {/* </div> */}
       </div>
     </div>
   );
