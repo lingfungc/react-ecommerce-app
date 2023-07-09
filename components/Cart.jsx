@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import axios from "axios";
 
@@ -15,23 +15,44 @@ import { TiDeleteOutline } from "react-icons/ti";
 
 import toast from "react-hot-toast";
 
-import { useStateContext } from "@/context/StateContext";
+import { useStateContext } from "../context/StateContext";
 
 import { urlFor } from "../lib/client";
 
 import getStripe from "../lib/getStripe";
 
 const Cart = () => {
-  const cartRef = useRef();
-
   const {
     totalPrice,
     totalQuantities,
     cartItems,
+    showCart,
     setShowCart,
     onRemove,
     toggleCartItemQuantity,
   } = useStateContext();
+
+  const cartRef = useRef(null);
+  const [isClickedOutside, setIsClickedOutside] = useState(false);
+
+  // useEffect(() => {
+  const handleClickOutside = (event) => {
+    // console.log(event);
+
+    if (cartRef.current && !cartRef.current.contains(event.target)) {
+      // setIsClickedOutside(true);
+      setShowCart(false);
+    } else {
+      // setIsClickedOutside(false);
+    }
+  };
+
+  // document.addEventListener("click", handleClickOutside);
+
+  // return () => {
+  //   document.removeEventListener("click", handleClickOutside);
+  // };
+  // }, []);
 
   const handleCheckout = async () => {
     const stripe = await getStripe();
@@ -82,9 +103,9 @@ const Cart = () => {
   };
 
   return (
-    <div className="cart-wrapper" ref={cartRef}>
+    <div className="cart-wrapper" onClick={handleClickOutside}>
       {/* Cart Header */}
-      <div className="cart-container">
+      <div className="cart-container" ref={cartRef}>
         <button
           type="button"
           className="cart-heading"
