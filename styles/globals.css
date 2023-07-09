@@ -49,12 +49,17 @@ a {
   margin: 0 auto;
 }
 
-.carousel-arrows {
-  display: flex;
-  justify-content: space-between;
+.carousel-scroll-left {
   position: absolute;
-  width: 740px;
-  transform: translate(-30px, 160px);
+  left: 260px;
+  transform: translateY(160px);
+  cursor: pointer;
+}
+
+.carousel-scroll-right {
+  position: absolute;
+  right: 260px;
+  transform: translateY(160px);
   cursor: pointer;
 }
 

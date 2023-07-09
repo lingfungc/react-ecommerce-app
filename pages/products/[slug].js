@@ -22,23 +22,39 @@ const ProductDetails = ({ product, products }) => {
 
   const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
 
-  const carouselRef = useRef(null);
-
   const handleBuyNow = () => {
     onAdd(product, qty);
     setShowCart(true);
   };
 
+  const carouselRef = useRef(null);
+
   const [scrollAmount, setScrollAmount] = useState(0);
+  const [showScrollLeft, setShowScrollLeft] = useState(false);
+  const [showScrollRight, setShowScrollRight] = useState(true);
 
   let scrollPerClick = 480;
 
   useEffect(() => {
+    const carouselWidth = carouselRef.current.scrollWidth;
+
     carouselRef.current.scrollTo({
       top: 0,
       left: scrollAmount,
       behavior: "smooth",
     });
+
+    if (scrollAmount > 0) {
+      setShowScrollLeft(true);
+    } else if (scrollAmount === 0) {
+      setShowScrollLeft(false);
+    }
+
+    if (scrollAmount > carouselWidth - scrollPerClick) {
+      setShowScrollRight(false);
+    } else if (scrollAmount < carouselWidth) {
+      setShowScrollRight(true);
+    }
   }, [scrollAmount]);
 
   const scrollLeft = () => {
@@ -142,8 +158,18 @@ const ProductDetails = ({ product, products }) => {
         {/* <div className="maylike-products-container track"> */}
         <div className="carousel">
           <div className="carousel-arrows">
-            <AiOutlineLeft onClick={scrollLeft} />
-            <AiOutlineRight onClick={scrollRight} />
+            {showScrollLeft && (
+              <AiOutlineLeft
+                onClick={scrollLeft}
+                className="carousel-scroll-left"
+              />
+            )}
+            {showScrollRight && (
+              <AiOutlineRight
+                onClick={scrollRight}
+                className="carousel-scroll-right"
+              />
+            )}
           </div>
           <div className="carousel-cards" ref={carouselRef}>
             {products.map((item) => (
