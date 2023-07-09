@@ -42,20 +42,20 @@ export const StateContext = ({ children }) => {
     window.localStorage.setItem("cartPrice", JSON.stringify(totalPrice));
   }, [cartItems, totalQuantities, totalPrice]);
 
-  useEffect(() => {
-    setCartItems(JSON.parse(localStorage.getItem("cart")));
+  // useEffect(() => {
+  //   setCartItems(JSON.parse(localStorage.getItem("cart")));
 
-    let totalCartQty = 0;
-    let totalCartPrice = 0;
+  //   let totalCartQty = 0;
+  //   let totalCartPrice = 0;
 
-    cartItems.forEach((item) => {
-      totalCartQty += item.quantity;
-      totalCartPrice += item.price * item.quantity;
-    });
+  //   cartItems.forEach((item) => {
+  //     totalCartQty += item.quantity;
+  //     totalCartPrice += item.price * item.quantity;
+  //   });
 
-    setTotalQuantities(totalCartQty);
-    setTotalPrice(totalCartPrice);
-  }, []);
+  //   setTotalQuantities(totalCartQty);
+  //   setTotalPrice(totalCartPrice);
+  // }, []);
 
   const onAdd = (product, quantity) => {
     const checkProductInCart = cartItems.find(
