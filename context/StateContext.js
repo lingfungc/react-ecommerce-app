@@ -37,11 +37,11 @@ export const StateContext = ({ children }) => {
   let selectedProduct;
   let selectedProductIndex;
 
-  useEffect(() => {
-    window.localStorage.setItem("cart", JSON.stringify(cartItems));
-    window.localStorage.setItem("cartQty", JSON.stringify(totalQuantities));
-    window.localStorage.setItem("cartPrice", JSON.stringify(totalPrice));
-  }, [cartItems, totalQuantities, totalPrice]);
+  // useEffect(() => {
+  //   window.localStorage.setItem("cart", JSON.stringify(cartItems));
+  //   window.localStorage.setItem("cartQty", JSON.stringify(totalQuantities));
+  //   window.localStorage.setItem("cartPrice", JSON.stringify(totalPrice));
+  // }, [cartItems, totalQuantities, totalPrice]);
 
   // useEffect(() => {
   //   setCartItems(JSON.parse(localStorage.getItem("cart")));

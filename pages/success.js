@@ -22,7 +22,7 @@ const Success = () => {
     runFireworks();
 
     // * This empty array indicates that we reset everything when we land to this "success" page
-  }, []);
+  }, [setCartItems, setTotalPrice, setTotalQuantities]);
 
   return (
     <div className="success-wrapper">
