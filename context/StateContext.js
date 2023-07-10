@@ -5,14 +5,16 @@ const Context = createContext();
 
 export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
-  const [cartItems, setCartItems] = useState(() => {
-    // if (typeof window !== "undefined") {
-    const data = JSON.parse(localStorage.getItem("cart"));
-    return data;
-    // }
-    // return null;
-    // return [];
-  });
+
+  const [cartItems, setCartItems] = useState([]);
+  // const [cartItems, setCartItems] = useState(() => {
+  //   if (typeof window !== "undefined") {
+  //     const data = JSON.parse(localStorage.getItem("cart"));
+  //     return data;
+  //   }
+  //   return null;
+  //   // return [];
+  // });
 
   const [totalPrice, setTotalPrice] = useState(0);
   // const [totalPrice, setTotalPrice] = useState(() => {
