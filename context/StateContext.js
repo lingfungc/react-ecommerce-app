@@ -8,6 +8,7 @@ export const StateContext = ({ children }) => {
 
   // const [cartItems, setCartItems] = useState([]);
   const [cartItems, setCartItems] = useState(() => {
+    // ? This "window" and "localStorage" only works in localhost but not in production
     if (typeof window !== "undefined") {
       const data = JSON.parse(localStorage.getItem("cart"));
 
@@ -15,7 +16,6 @@ export const StateContext = ({ children }) => {
       console.log(data);
 
       // return data;
-
       return [];
     }
     return null;
