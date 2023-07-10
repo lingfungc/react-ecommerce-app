@@ -6,12 +6,12 @@ const Context = createContext();
 export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
   const [cartItems, setCartItems] = useState(() => {
-    if (typeof window !== "undefined") {
-      const data = JSON.parse(localStorage.getItem("cart"));
-      return data;
-    }
+    // if (typeof window !== "undefined") {
+    const data = JSON.parse(localStorage.getItem("cart"));
+    return data;
+    // }
     // return null;
-    return [];
+    // return [];
   });
 
   const [totalPrice, setTotalPrice] = useState(0);
