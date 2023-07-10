@@ -10,7 +10,8 @@ export const StateContext = ({ children }) => {
       const data = JSON.parse(localStorage.getItem("cart"));
       return data;
     }
-    return null;
+    // return null;
+    return [];
   });
 
   const [totalPrice, setTotalPrice] = useState(0);

@@ -33,6 +33,7 @@ const Cart = () => {
   } = useStateContext();
 
   const cartRef = useRef(null);
+
   const [isClickedOutside, setIsClickedOutside] = useState(false);
 
   // useEffect(() => {
@@ -117,7 +118,8 @@ const Cart = () => {
         </button>
 
         {/* Empty Cart */}
-        {cartItems.length < 1 && (
+        {/* {cartItems.length < 1 && ( */}
+        {cartItems && (
           <div className="empty-cart">
             <AiOutlineShopping size={150} className="m-center" />
             <h3>Your shopping bag is empty</h3>
@@ -135,7 +137,8 @@ const Cart = () => {
 
         {/* Products in Cart */}
         <div className="product-container">
-          {cartItems.length >= 1 &&
+          {/* {cartItems.length >= 1 && */}
+          {cartItems &&
             cartItems.map((item) => (
               <div className="product" key={item._id}>
                 <img
@@ -184,7 +187,8 @@ const Cart = () => {
         </div>
 
         {/* Cart Footer */}
-        {cartItems.length >= 1 && (
+        {/* {cartItems.length >= 1 && ( */}
+        {cartItems && (
           <div className="cart-bottom">
             <div className="total">
               <h3>Subtotal:</h3>
