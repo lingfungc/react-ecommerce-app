@@ -6,24 +6,24 @@ import { toast } from "react-hot-toast";
 
 const Context = createContext();
 
-const loadSaveItems = () => {
-  if (typeof window !== "undefined") {
-    const data = JSON.parse(localStorage.getItem("cart"));
+// const loadSaveItems = () => {
+//   if (typeof window !== "undefined") {
+//     const data = JSON.parse(localStorage.getItem("cart"));
 
-    console.log("This is the data from StateContext()");
-    console.log(data);
+//     console.log("This is the data from StateContext()");
+//     console.log(data);
 
-    return data;
-  }
-};
+//     return data;
+//   }
+// };
 
-const saveItems = loadSaveItems();
+// const saveItems = loadSaveItems();
 
 export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
 
-  // const [cartItems, setCartItems] = useState([]);
-  const [cartItems, setCartItems] = useState(saveItems);
+  const [cartItems, setCartItems] = useState([]);
+  // const [cartItems, setCartItems] = useState(saveItems);
   // const [cartItems, setCartItems] = useState(() => {
   //   // ? This "window" and "localStorage" only works in localhost but not in production
   //   if (typeof window !== "undefined") {
@@ -60,24 +60,24 @@ export const StateContext = ({ children }) => {
   let selectedProduct;
   let selectedProductIndex;
 
-  useEffect(() => {
-    window.localStorage.setItem("cart", JSON.stringify(cartItems));
-    window.localStorage.setItem("cartQty", JSON.stringify(totalQuantities));
-    window.localStorage.setItem("cartPrice", JSON.stringify(totalPrice));
-  }, [cartItems, totalQuantities, totalPrice]);
+  // useEffect(() => {
+  //   window.localStorage.setItem("cart", JSON.stringify(cartItems));
+  //   window.localStorage.setItem("cartQty", JSON.stringify(totalQuantities));
+  //   window.localStorage.setItem("cartPrice", JSON.stringify(totalPrice));
+  // }, [cartItems, totalQuantities, totalPrice]);
 
-  useEffect(() => {
-    let totalCartQty = 0;
-    let totalCartPrice = 0;
+  // useEffect(() => {
+  //   let totalCartQty = 0;
+  //   let totalCartPrice = 0;
 
-    cartItems.forEach((item) => {
-      totalCartQty += item.quantity;
-      totalCartPrice += item.price * item.quantity;
-    });
+  //   cartItems.forEach((item) => {
+  //     totalCartQty += item.quantity;
+  //     totalCartPrice += item.price * item.quantity;
+  //   });
 
-    setTotalQuantities(totalCartQty);
-    setTotalPrice(totalCartPrice);
-  }, []);
+  //   setTotalQuantities(totalCartQty);
+  //   setTotalPrice(totalCartPrice);
+  // }, []);
 
   const onAdd = (product, quantity) => {
     const checkProductInCart = cartItems.find(
