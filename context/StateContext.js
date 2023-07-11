@@ -1,25 +1,41 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 
+// This is not working for getting the cartItems data from localStorage in "lib"
+// import { loadCartItems } from "../lib/loadCartItems";
+
 const Context = createContext();
+
+const loadSaveItems = () => {
+  if (typeof window !== "undefined") {
+    const data = JSON.parse(localStorage.getItem("cart"));
+
+    console.log("This is the data from StateContext()");
+    console.log(data);
+
+    return data;
+  }
+};
+
+const saveItems = loadSaveItems();
 
 export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
 
   // const [cartItems, setCartItems] = useState([]);
-  const [cartItems, setCartItems] = useState(() => {
-    // ? This "window" and "localStorage" only works in localhost but not in production
-    if (typeof window !== "undefined") {
-      const data = JSON.parse(localStorage.getItem("cart"));
+  const [cartItems, setCartItems] = useState(saveItems);
+  // const [cartItems, setCartItems] = useState(() => {
+  //   // ? This "window" and "localStorage" only works in localhost but not in production
+  //   if (typeof window !== "undefined") {
+  //     const data = JSON.parse(localStorage.getItem("cart"));
 
-      console.log("This is the data from StateContext()");
-      console.log(data);
+  //     console.log("This is the data from StateContext()");
+  //     console.log(data);
 
-      // return data;
-      return [];
-    }
-    return null;
-  });
+  //     return data;
+  //   }
+  //   return null;
+  // });
 
   const [totalPrice, setTotalPrice] = useState(0);
   // const [totalPrice, setTotalPrice] = useState(() => {
@@ -51,8 +67,6 @@ export const StateContext = ({ children }) => {
   }, [cartItems, totalQuantities, totalPrice]);
 
   useEffect(() => {
-    setCartItems(JSON.parse(localStorage.getItem("cart")));
-
     let totalCartQty = 0;
     let totalCartPrice = 0;
 
